@@ -1,16 +1,18 @@
-;;;		 add more func (step by step)
+;;;		 add more feature (step by step)
+;================================================================================================;
+;;   add feature name in GUICtrlSetData under $lstMode
 
 ;;   Case $btnReady :
-;	  ElseIf ($selectedItems = ...) Then
+;	  ElseIf ($selectedItemText = "feature name") Then
 ;		 ToolTip($textInBtnReady & @CRLF & "...", 0, 0)
 
 ;;   Case $lstMode :
-;	  ElseIf ($selectedItems = ...) Then
-;		 $text... = @TAB & "..." & @CRLF & "" & @CRLF & "..."
+;	  ElseIf ($selectedItemText = "feature name") Then
+;		 $text... = @TAB & "MODE ..." & @CRLF & "" & @CRLF & "..." & @CRLF & $selectedItemText
 ;		 GUICtrlSetData($edtDescription, $text...)
 
 ;;   _start():
-;	  ElseIf ($selectedItems = ...) Then
+;	  ElseIf ($selectedItemText = "feature name") Then
 ;		 ToolTip($textInF2Key & @CRLF & "...", 0, 0)
 ;		 start...()
 
@@ -19,13 +21,13 @@
 ;		 $fInterrupt = 0
 ;		 While 1
 ;			If $fInterrupt <> 0 Then
-;			   ConsoleWrite("Stop" & @CRLF)
+;			   ConsoleWrite("Stop " & $selectedItemText & @CRLF)
 ;			   Return
 ;			EndIf
 ;
-;			code here
 ;		 WEnd
 ;	  EndFunc
+;================================================================================================;
 
 #include <ButtonConstants.au3>
 #include <EditConstants.au3>
@@ -45,10 +47,10 @@ GUICtrlSetCursor (-1, 0)
 $Label1 = GUICtrlCreateLabel("Viet ARK", 83, 128, 126, 36)
 GUICtrlSetFont(-1, 20, 800, 2, "Lucida Bright")
 $lstMode = GUICtrlCreateList("", 23, 192, 241, 294, BitOR($WS_BORDER, $WS_VSCROLL))
-GUICtrlSetData(-1, "spam join server|metal run|snow owl|coming soon 1|coming soon 2|coming soon 3|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
+GUICtrlSetData(-1, "metal run|spam join server|snow owl|coming soon 1|coming soon 2|coming soon 3|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
 GUICtrlSetFont(-1, 14, 800, 0, "MS Sans Serif")
 $Label2 = GUICtrlCreateLabel("Choose mode:", 25, 168, 84, 17)
-$Icon1 = GUICtrlCreateIcon("D:\autoit\VietARK\asset\vietark.ico", -1, 104, 40, 81, 81)
+$Icon1 = GUICtrlCreateIcon(@ScriptDir&"\asset\vietark.ico", -1, 104, 40, 81, 81)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $Group2 = GUICtrlCreateGroup("VietARK - Description", 304, 8, 545, 585)
 GUICtrlSetFont(-1, 8, 800, 0, "MS Sans Serif")
@@ -84,7 +86,7 @@ $fInterrupt = 0
 
 While 1
    $nMsg = GUIGetMsg()
-   $selectedItems = _GUICtrlListBox_GetCurSel($lstMode)
+   $selectedItemText = _GUICtrlListBox_GetText($lstMode, _GUICtrlListBox_GetCurSel($lstMode))
 
    Switch $nMsg
 	  Case $GUI_EVENT_CLOSE
@@ -100,9 +102,9 @@ While 1
 	  Case $btnReady
 		 WinActivate("ARK: Survival Evolved")
 		 $textInBtnReady = "VietARK - Thanks for choosing us"
-		 If ($selectedItems = 0) Then
+		 If ($selectedItemText = "spam join server") Then
 			ToolTip($textInBtnReady & @CRLF & "testing 1", 0, 0)
-		 ElseIf ($selectedItems = 1) Then
+		 ElseIf ($selectedItemText = "metal run") Then
 			ToolTip($textInBtnReady & @CRLF & "testing 2", 0, 0)
 
 		 Else
@@ -111,12 +113,11 @@ While 1
 
 
 	  Case $lstMode
-		 ;$selectedItems = _GUICtrlListBox_GetCurSel($lstMode)
-		 If ($selectedItems = 0) Then
+		 If ($selectedItemText = "spam join server") Then
 			$text0 = @TAB & "SPAM JOINING SERVER" & @CRLF & "" & @CRLF & "- Made by VietARK" & @CRLF & "- Made by VietARK"
 			GUICtrlSetData($edtDescription, $text0)
-		 ElseIf ($selectedItems = 1) Then
-			$text1 = @TAB & "MODE 2" & @CRLF & "" & @CRLF & "- Made by VietARK" & @CRLF & "- Made by VietARK"
+		 ElseIf ($selectedItemText = "metal run") Then
+			$text1 = @TAB & "METAL RUN" & @CRLF & "" & @CRLF & "- Made by VietARK" & @CRLF & $selectedItemText
 			GUICtrlSetData($edtDescription, $text1)
 
 		 Else
@@ -137,11 +138,11 @@ Func _start()
    ;$ok = NOT $ok
    $textInF2Key = "VietARK - Thanks for choosing us"
 
-   If ($selectedItems = 0) Then
+   If ($selectedItemText = "spam join server") Then
 	  ToolTip($textInF2Key & @CRLF & "testing 1", 0, 0)
 	  start0()
-   ElseIf ($selectedItems = 1) Then
-	  ToolTip($textInF2Key & @CRLF & "testing 1", 0, 0)
+   ElseIf ($selectedItemText = "metal run") Then
+	  ToolTip($textInF2Key & @CRLF & "testing 2", 0, 0)
 	  start1()
 
    Else
@@ -156,7 +157,7 @@ Func start0()
    $fInterrupt = 0
    While 1
 	  If $fInterrupt <> 0 Then
-		 ConsoleWrite("Stop" & @CRLF)
+		 ConsoleWrite("Stop " & $selectedItemText & @CRLF)
 		 Return
 	  EndIf
 
@@ -171,7 +172,7 @@ Func start1()
    $fInterrupt = 0
    While 1
 	  If $fInterrupt <> 0 Then
-		 ConsoleWrite("Stop" & @CRLF)
+		 ConsoleWrite("Stop " & $selectedItemText & @CRLF)
 		 Return
 	  EndIf
 
