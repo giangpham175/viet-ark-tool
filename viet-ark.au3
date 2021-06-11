@@ -6,8 +6,8 @@
 #include <WindowsConstants.au3>
 
 #Region ### START Koda GUI section ###
-$Form1 = GUICreate("VietARK", 856, 628, 591, 126)
-$Group1 = GUICtrlCreateGroup("VietARK-Controller", 8, 8, 273, 585)
+$Form1 = GUICreate("VietARK", 856, 628, 700, 185)
+$Group1 = GUICtrlCreateGroup("VietARK - Controller", 8, 8, 273, 585)
 GUICtrlSetFont(-1, 8, 800, 0, "MS Sans Serif")
 $btnFacebook = GUICtrlCreateButton("Facebook", 23, 512, 241, 33)
 GUICtrlSetCursor (-1, 0)
@@ -19,30 +19,30 @@ $lstMode = GUICtrlCreateList("", 23, 192, 241, 294, BitOR($WS_BORDER, $WS_VSCROL
 GUICtrlSetData(-1, "spam join server|metal run|snow owl|coming soon 1|coming soon 2|coming soon 3|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
 GUICtrlSetFont(-1, 14, 800, 0, "MS Sans Serif")
 $Label2 = GUICtrlCreateLabel("Choose mode:", 25, 168, 84, 17)
-$Icon1 = GUICtrlCreateIcon(@ScriptDir&"\asset\afk.ico", -1, 104, 40, 81, 73)
+$Icon1 = GUICtrlCreateIcon("D:\autoit\VietARK\asset\vietark.ico", -1, 104, 40, 81, 81)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
-$Group2 = GUICtrlCreateGroup("VietARK-Description", 304, 8, 585, 585)
+$Group2 = GUICtrlCreateGroup("VietARK - Description", 304, 8, 545, 585)
 GUICtrlSetFont(-1, 8, 800, 0, "MS Sans Serif")
-$editDescription = GUICtrlCreateEdit("", 312, 24, 529, 425)
-GUICtrlSetData(-1, "Welcome to VietARK.")
+$edtDescription = GUICtrlCreateEdit("", 312, 24, 529, 425)
+GUICtrlSetData(-1, "Edit1")
 GUICtrlSetFont(-1, 15, 400, 0, "MS Sans Serif")
 $btnReady = GUICtrlCreateButton("Ready", 312, 552, 150, 33)
 GUICtrlSetCursor (-1, 0)
 $btnClose = GUICtrlCreateButton("Close", 695, 552, 150, 33)
 GUICtrlSetCursor (-1, 0)
-$Label3 = GUICtrlCreateLabel("made by heodat", 515, 560, 121, 29)
+$Label3 = GUICtrlCreateLabel("made by heodat", 519, 560, 124, 20)
 GUICtrlSetFont(-1, 10, 800, 4, "MS Sans Serif")
 $Label4 = GUICtrlCreateLabel("Remember this key:", 312, 480, 194, 29)
 GUICtrlSetFont(-1, 15, 800, 0, "MS Sans Serif")
 GUICtrlSetColor(-1, 0xFF0000)
-$Label5 = GUICtrlCreateLabel("F2  to Start", 540, 456, 90, 20)
+$Label5 = GUICtrlCreateLabel("F2  to Start", 544, 456, 78, 20)
 GUICtrlSetFont(-1, 10, 800, 0, "MS Sans Serif")
-$Label6 = GUICtrlCreateLabel("F3  to Pause / Resume (not supported yet)", 540, 488, 306, 20)
+$Label6 = GUICtrlCreateLabel("F3  to Pause / Resume (not supprted yet)", 544, 488, 285, 20)
 GUICtrlSetFont(-1, 10, 800, 0, "MS Sans Serif")
-$Label7 = GUICtrlCreateLabel("F4  to Stop", 540, 520, 90, 20)
+$Label7 = GUICtrlCreateLabel("F4  to Stop", 544, 520, 78, 20)
 GUICtrlSetFont(-1, 10, 800, 0, "MS Sans Serif")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
-$Label8 = GUICtrlCreateLabel("Thanks for the support from PXC, HC and friends", 272, 600, 300, 20)
+$Label8 = GUICtrlCreateLabel("Thanks for the support from PXC, HC and friends", 272, 600, 328, 20)
 GUICtrlSetFont(-1, 10, 400, 2, "MS Sans Serif")
 GUICtrlSetColor(-1, 0xFF0000)
 GUISetState(@SW_SHOW)
@@ -70,12 +70,13 @@ While 1
 
 	  Case $btnReady
 		 WinActivate("ARK: Survival Evolved")
+		 $textInBtnReady = "VietARK - Thanks for choosing us"
 		 If ($selectedItems = 0) Then
-			ToolTip("VietARK - https://discord.gg/gkYnuKB" & @CRLF & "testing 1", 0, 0)
+			ToolTip($textInBtnReady & @CRLF & "testing 1", 0, 0)
 		 ElseIf ($selectedItems = 1) Then
-			ToolTip("VietARK - https://discord.gg/gkYnuKB" & @CRLF & "testing 2", 0, 0)
+			ToolTip($textInBtnReady & @CRLF & "testing 2", 0, 0)
 		 Else
-			ToolTip("VietARK - https://discord.gg/gkYnuKB", 0, 0)
+			ToolTip($textInBtnReady, 0, 0)
 		 EndIf
 
 
@@ -83,12 +84,12 @@ While 1
 		 ;$selectedItems = _GUICtrlListBox_GetCurSel($lstMode)
 		 If ($selectedItems = 0) Then
 			$text0 = @TAB & "SPAM JOINING SERVER" & @CRLF & "" & @CRLF & "- Made by VietARK" & @CRLF & "- Made by VietARK"
-			GUICtrlSetData($editDescription, $text0)
+			GUICtrlSetData($edtDescription, $text0)
 		 ElseIf ($selectedItems = 1) Then
 			$text1 = @TAB & "MODE 2" & @CRLF & "" & @CRLF & "- Made by VietARK" & @CRLF & "- Made by VietARK"
-			GUICtrlSetData($editDescription, $text1)
+			GUICtrlSetData($edtDescription, $text1)
 		 Else
-			GUICtrlSetData($editDescription, 'Welcome to VietARK.')
+			GUICtrlSetData($edtDescription, 'Welcome to VietARK.')
 		 EndIf
 
 
@@ -96,20 +97,24 @@ While 1
 WEnd
 
  Func _Interrupt()
-     ToolTip("VietARK - https://discord.gg/gkYnuKB", 0, 0)
+     ToolTip("VietARK - Thanks for choosing us", 0, 0)
      $fInterrupt = 2
  EndFunc
 
 Func _start()
    WinActivate("ARK: Survival Evolved")
    ;$ok = NOT $ok
+   $textInF2Key = "VietARK - Thanks for choosing us"
 
    If ($selectedItems = 0) Then
-	  ToolTip("VietARK - https://discord.gg/gkYnuKB" & @CRLF & "testing 1", 0, 0)
+	  ToolTip($textInF2Key & @CRLF & "testing 1", 0, 0)
 	  start0()
    ElseIf ($selectedItems = 1) Then
-	  ToolTip("VietARK - https://discord.gg/gkYnuKB" & @CRLF & "testing 1", 0, 0)
+	  ToolTip($textInF2Key & @CRLF & "testing 1", 0, 0)
 	  start1()
+   Else
+	  ToolTip($textInF2Key, 0, 0)
+	  MsgBox(0, "VietARK", "No mode choosed")
    EndIf
 
 
