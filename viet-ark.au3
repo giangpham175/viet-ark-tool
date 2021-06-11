@@ -4,6 +4,7 @@
 #include <GUIListBox.au3>
 #include <StaticConstants.au3>
 #include <WindowsConstants.au3>
+
 #Region ### START Koda GUI section ###
 $Form1 = GUICreate("VietARK", 856, 628, 591, 126)
 $Group1 = GUICtrlCreateGroup("VietARK-Controller", 8, 8, 273, 585)
@@ -18,7 +19,7 @@ $lstMode = GUICtrlCreateList("", 23, 192, 241, 294, BitOR($WS_BORDER, $WS_VSCROL
 GUICtrlSetData(-1, "spam join server|metal run|snow owl|coming soon 1|coming soon 2|coming soon 3|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
 GUICtrlSetFont(-1, 14, 800, 0, "MS Sans Serif")
 $Label2 = GUICtrlCreateLabel("Choose mode:", 25, 168, 84, 17)
-$Icon1 = GUICtrlCreateIcon("D:\autoit\VietARK\asset\afk.ico", -1, 104, 40, 81, 73)
+$Icon1 = GUICtrlCreateIcon(@ScriptDir&"\asset\afk.ico", -1, 104, 40, 81, 73)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $Group2 = GUICtrlCreateGroup("VietARK-Description", 304, 8, 585, 585)
 GUICtrlSetFont(-1, 8, 800, 0, "MS Sans Serif")
