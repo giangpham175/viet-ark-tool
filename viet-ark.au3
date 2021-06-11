@@ -1,3 +1,32 @@
+;;;		 add more func (step by step)
+
+;;   Case $btnReady :
+;	  ElseIf ($selectedItems = ...) Then
+;		 ToolTip($textInBtnReady & @CRLF & "...", 0, 0)
+
+;;   Case $lstMode :
+;	  ElseIf ($selectedItems = ...) Then
+;		 $text... = @TAB & "..." & @CRLF & "" & @CRLF & "..."
+;		 GUICtrlSetData($edtDescription, $text...)
+
+;;   _start():
+;	  ElseIf ($selectedItems = ...) Then
+;		 ToolTip($textInF2Key & @CRLF & "...", 0, 0)
+;		 start...()
+
+;;   start...()
+;	  Func start...()
+;		 $fInterrupt = 0
+;		 While 1
+;			If $fInterrupt <> 0 Then
+;			   ConsoleWrite("Stop" & @CRLF)
+;			   Return
+;			EndIf
+;
+;			code here
+;		 WEnd
+;	  EndFunc
+
 #include <ButtonConstants.au3>
 #include <EditConstants.au3>
 #include <GUIConstantsEx.au3>
@@ -24,7 +53,7 @@ GUICtrlCreateGroup("", -99, -99, 1, 1)
 $Group2 = GUICtrlCreateGroup("VietARK - Description", 304, 8, 545, 585)
 GUICtrlSetFont(-1, 8, 800, 0, "MS Sans Serif")
 $edtDescription = GUICtrlCreateEdit("", 312, 24, 529, 425)
-GUICtrlSetData(-1, "Edit1")
+GUICtrlSetData(-1, "Welcome to VietARK.")
 GUICtrlSetFont(-1, 15, 400, 0, "MS Sans Serif")
 $btnReady = GUICtrlCreateButton("Ready", 312, 552, 150, 33)
 GUICtrlSetCursor (-1, 0)
@@ -51,7 +80,7 @@ GUISetState(@SW_SHOW)
 HotKeySet("{F4}", "_Interrupt")
 HotKeySet("{F2}", "_start")
 $fInterrupt = 0
-$ok = False
+;$ok = False
 
 While 1
    $nMsg = GUIGetMsg()
@@ -75,6 +104,7 @@ While 1
 			ToolTip($textInBtnReady & @CRLF & "testing 1", 0, 0)
 		 ElseIf ($selectedItems = 1) Then
 			ToolTip($textInBtnReady & @CRLF & "testing 2", 0, 0)
+
 		 Else
 			ToolTip($textInBtnReady, 0, 0)
 		 EndIf
@@ -88,6 +118,7 @@ While 1
 		 ElseIf ($selectedItems = 1) Then
 			$text1 = @TAB & "MODE 2" & @CRLF & "" & @CRLF & "- Made by VietARK" & @CRLF & "- Made by VietARK"
 			GUICtrlSetData($edtDescription, $text1)
+
 		 Else
 			GUICtrlSetData($edtDescription, 'Welcome to VietARK.')
 		 EndIf
@@ -112,6 +143,7 @@ Func _start()
    ElseIf ($selectedItems = 1) Then
 	  ToolTip($textInF2Key & @CRLF & "testing 1", 0, 0)
 	  start1()
+
    Else
 	  ToolTip($textInF2Key, 0, 0)
 	  MsgBox(0, "VietARK", "No mode choosed")
