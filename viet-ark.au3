@@ -21,7 +21,6 @@
 ;		 $fInterrupt = 0
 ;		 While 1
 ;			If $fInterrupt <> 0 Then
-;			   ConsoleWrite("Stop " & $selectedItemText & @CRLF)
 ;			   Return
 ;			EndIf
 ;
@@ -47,7 +46,7 @@ GUICtrlSetCursor (-1, 0)
 $Label1 = GUICtrlCreateLabel("Viet ARK", 83, 128, 126, 36)
 GUICtrlSetFont(-1, 20, 800, 2, "Lucida Bright")
 $lstMode = GUICtrlCreateList("", 23, 192, 241, 294, BitOR($WS_BORDER, $WS_VSCROLL))
-GUICtrlSetData(-1, "metal run|spam join server|snow owl|coming soon 1|coming soon 2|coming soon 3|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
+GUICtrlSetData(-1, "take berries|spam join server|snow owl|coming soon 1|coming soon 2|coming soon 3|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
 GUICtrlSetFont(-1, 14, 800, 0, "MS Sans Serif")
 $Label2 = GUICtrlCreateLabel("Choose mode:", 25, 168, 84, 17)
 $Icon1 = GUICtrlCreateIcon(@ScriptDir&"\asset\vietark.ico", -1, 104, 40, 81, 81)
@@ -102,10 +101,13 @@ While 1
 	  Case $btnReady
 		 WinActivate("ARK: Survival Evolved")
 		 $textInBtnReady = "VietARK - Thanks for choosing us"
-		 If ($selectedItemText = "spam join server") Then
-			ToolTip($textInBtnReady & @CRLF & "testing 1", 0, 0)
+		 $textHotKeyInBtnReady = "F2: Start  -  F4: Stop"
+		 $textCommonInBtnReady = $textInBtnReady & @CRLF & $selectedItemText & @CRLF & $textHotKeyInBtnReady
+
+		 If ($selectedItemText = "take berries") Then
+			ToolTip($textCommonInBtnReady, 0, 0)
 		 ElseIf ($selectedItemText = "metal run") Then
-			ToolTip($textInBtnReady & @CRLF & "testing 2", 0, 0)
+			ToolTip($textCommonInBtnReady, 0, 0)
 
 		 Else
 			ToolTip($textInBtnReady, 0, 0)
@@ -113,9 +115,14 @@ While 1
 
 
 	  Case $lstMode
-		 If ($selectedItemText = "spam join server") Then
-			$text0 = @TAB & "SPAM JOINING SERVER" & @CRLF & "" & @CRLF & "- Made by VietARK" & @CRLF & "- Made by VietARK"
-			GUICtrlSetData($edtDescription, $text0)
+		 If ($selectedItemText = "take berries") Then
+			$text0 = "TAKE BERRIES"
+			$text0L1 = "- Required settings: 1920x1080-WindowsFullScreen"
+			$text0L2 = "- Disable Menu Transitions"
+			$text0L3 = "- Put feces in your inventory, look at the pot to get it"
+			$text0Final = @TAB & $text0 & @CRLF & "" & @CRLF & $text0L1 & @CRLF & $text0L2 & @CRLF & "" & @CRLF & $text0L3
+			GUICtrlSetData($edtDescription, $text0Final)
+
 		 ElseIf ($selectedItemText = "metal run") Then
 			$text1 = @TAB & "METAL RUN" & @CRLF & "" & @CRLF & "- Made by VietARK" & @CRLF & $selectedItemText
 			GUICtrlSetData($edtDescription, $text1)
@@ -137,10 +144,13 @@ Func _start()
    WinActivate("ARK: Survival Evolved")
    ;$ok = NOT $ok
    $textInF2Key = "VietARK - Thanks for choosing us"
+   $textHotKeyInF2Key = "F2: Start  -  F4: Stop"
+   $textCommonInF2Key = $textInF2Key & @CRLF & $selectedItemText & @CRLF & $textHotKeyInF2Key
 
-   If ($selectedItemText = "spam join server") Then
-	  ToolTip($textInF2Key & @CRLF & "testing 1", 0, 0)
+   If ($selectedItemText = "take berries") Then
+	  ToolTip($textCommonInF2Key, 0, 0)
 	  start0()
+
    ElseIf ($selectedItemText = "metal run") Then
 	  ToolTip($textInF2Key & @CRLF & "testing 2", 0, 0)
 	  start1()
@@ -157,14 +167,18 @@ Func start0()
    $fInterrupt = 0
    While 1
 	  If $fInterrupt <> 0 Then
-		 ConsoleWrite("Stop " & $selectedItemText & @CRLF)
 		 Return
 	  EndIf
 
-	  MouseClick('left', 92, 644)
+	  Sleep(100)
+	  Send('{F}')
 	  Sleep(1000)
-	  MouseClick('left', 1811, 73)
-	  Sleep(1000)
+	  MouseClick("left", 1480, 192, 1, 1)
+	  Sleep(100)
+	  MouseClick("left", 355, 185, 1, 1)
+	  Sleep(100)
+	  Send("{ESC}")
+	  Sleep(100)
    WEnd
 EndFunc
 
@@ -172,7 +186,6 @@ Func start1()
    $fInterrupt = 0
    While 1
 	  If $fInterrupt <> 0 Then
-		 ConsoleWrite("Stop " & $selectedItemText & @CRLF)
 		 Return
 	  EndIf
 
