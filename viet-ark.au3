@@ -46,7 +46,7 @@ GUICtrlSetCursor (-1, 0)
 $Label1 = GUICtrlCreateLabel("Viet ARK", 83, 128, 126, 36)
 GUICtrlSetFont(-1, 20, 800, 2, "Lucida Bright")
 $lstMode = GUICtrlCreateList("", 23, 192, 241, 294, BitOR($WS_BORDER, $WS_VSCROLL))
-GUICtrlSetData(-1, "take berries|gasoline separation|anti afk|coming soon 1|coming soon 2|coming soon 3|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
+GUICtrlSetData(-1, "take berries|gasoline separation|anti afk|hack feces|coming soon 2|coming soon 3|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
 GUICtrlSetFont(-1, 14, 800, 0, "MS Sans Serif")
 $Label2 = GUICtrlCreateLabel("Choose mode:", 25, 168, 84, 17)
 $Icon1 = GUICtrlCreateIcon(@ScriptDir&"\asset\vietark.ico", -1, 104, 40, 81, 81)
@@ -112,6 +112,8 @@ While 1
 			ToolTip($textCommonInBtnReady, 0, 0)
 		 ElseIf ($selectedItemText = "anti afk") Then
 			ToolTip($textCommonInBtnReady, 0, 0)
+		 ElseIf ($selectedItemText = "hack feces") Then
+			ToolTip($textCommonInBtnReady, 0, 0)
 
 		 Else
 			ToolTip($textInBtnReady, 0, 0)
@@ -143,6 +145,14 @@ While 1
 			$text2L3 = "- This feature will do eat and drink every hour"
 			$text2LFinal = @TAB & $text2 & @CRLF & @CRLF & $text2L1 & @CRLF & $text2L2 & @CRLF & $text2L3
 			GUICtrlSetData($edtDescription, $text2LFinal)
+
+		 ElseIf ($selectedItemText = "hack feces") Then
+			$text3 = "HACK FECES"
+			$text3L1 = "- Required settings: 1920x1080-WindowsFullScreen"
+			$text3L2 = "- Disable Menu Transitions"
+			$text3L3 = "- Wait for the food to turn gray, then sit on the toilet"
+			$text3LFinal = @TAB & $text3 & @CRLF & @CRLF & $text3L1 & @CRLF & $text3L2 & @CRLF & @CRLF & $text3L3
+			GUICtrlSetData($edtDescription, $text3LFinal)
 
 		 Else
 			GUICtrlSetData($edtDescription, 'Welcome to VietARK.')
@@ -176,6 +186,10 @@ Func _start()
 	  ToolTip($textCommonInF2Key, 0, 0)
 	  start2()
 
+   ElseIf ($selectedItemText = "hack feces") Then
+	  ToolTip($textCommonInF2Key, 0, 0)
+	  start3()
+
    Else
 	  ToolTip($textInF2Key, 0, 0)
 	  MsgBox(0, "VietARK", "No mode choosed")
@@ -205,6 +219,10 @@ EndFunc
 
 Func start1()
    For $i = 1 To 10
+	  If $fInterrupt <> 0 Then
+		 Return
+	  EndIf
+
 	  Sleep(100)
 	  MouseClick("left", 267, 179, 2, 1)
 	  Sleep(100)
@@ -264,6 +282,32 @@ Func start2()
 		 Sleep(200)
 		 $temp = 0
 	  EndIf
+   WEnd
+EndFunc
 
+Func start3()
+   $fInterrupt = 0
+   While 1
+	  If $fInterrupt <> 0 Then
+		 Return
+	  EndIf
+
+	  Send('{NUMPADADD}')
+	  Sleep(1000)
+	  Send('{F}')
+	  Sleep(3000)
+	  Local $TimFan = PixelSearch(1243, 233, 1337, 324, 0x8C8163, 10) ; Tìm ô đầu tiên trong toilet xem có phân không
+	  ; Mã màu SE : 0x97876A
+	  ; Mã màu CE : 0x8C8163
+	  ; Mã màu EX : 0x8C8163
+	  If Not @error Then
+		 MouseClick('', 960, 617)
+		 Sleep(100)
+		 Send('{ESC}')
+		 Sleep(500)
+	  Else
+		 MsgBox(16, "Server Lag", 'Tạm ngưng do không tìm thấy phân' & @CRLF & "Bấm nút Flush xả cầu, tắt inventory trong game" & @CRLF & "rồi mới tắt bảng này")
+		 Sleep(100)
+	  EndIf
    WEnd
 EndFunc
