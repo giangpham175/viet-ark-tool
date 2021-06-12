@@ -2,7 +2,7 @@
 
 **Discord:** [https://discord.gg/gkYnuKB](https://discord.gg/gkYnuKB)
 
-**Facebook** [https://www.facebook.com/songsotgiuabaykhunglonganthit](https://www.facebook.com/songsotgiuabaykhunglonganthit)
+**Facebook:** [https://www.facebook.com/songsotgiuabaykhunglonganthit](https://www.facebook.com/songsotgiuabaykhunglonganthit)
 
 # VietARK Tool
 In ARK, there are actions you will have to repeat over and over during your play, we will help you reduce them instead. We can even make it easier for you to play through some other features.
