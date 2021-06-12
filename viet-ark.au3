@@ -46,7 +46,7 @@ GUICtrlSetCursor (-1, 0)
 $Label1 = GUICtrlCreateLabel("Viet ARK", 83, 128, 126, 36)
 GUICtrlSetFont(-1, 20, 800, 2, "Lucida Bright")
 $lstMode = GUICtrlCreateList("", 23, 192, 241, 294, BitOR($WS_BORDER, $WS_VSCROLL))
-GUICtrlSetData(-1, "take berries|spam join server|snow owl|coming soon 1|coming soon 2|coming soon 3|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
+GUICtrlSetData(-1, "take berries|gasoline separation|snow owl|coming soon 1|coming soon 2|coming soon 3|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
 GUICtrlSetFont(-1, 14, 800, 0, "MS Sans Serif")
 $Label2 = GUICtrlCreateLabel("Choose mode:", 25, 168, 84, 17)
 $Icon1 = GUICtrlCreateIcon(@ScriptDir&"\asset\vietark.ico", -1, 104, 40, 81, 81)
@@ -100,13 +100,13 @@ While 1
 
 	  Case $btnReady
 		 WinActivate("ARK: Survival Evolved")
-		 $textInBtnReady = "VietARK - Thanks for choosing us"
+		 $textInBtnReady = "VietARK - " & $selectedItemText
 		 $textHotKeyInBtnReady = "F2: Start  -  F4: Stop"
-		 $textCommonInBtnReady = $textInBtnReady & @CRLF & $selectedItemText & @CRLF & $textHotKeyInBtnReady
+		 $textCommonInBtnReady = $textInBtnReady & @CRLF & $textHotKeyInBtnReady
 
 		 If ($selectedItemText = "take berries") Then
 			ToolTip($textCommonInBtnReady, 0, 0)
-		 ElseIf ($selectedItemText = "metal run") Then
+		 ElseIf ($selectedItemText = "gasoline separation") Then
 			ToolTip($textCommonInBtnReady, 0, 0)
 
 		 Else
@@ -120,12 +120,17 @@ While 1
 			$text0L1 = "- Required settings: 1920x1080-WindowsFullScreen"
 			$text0L2 = "- Disable Menu Transitions"
 			$text0L3 = "- Put feces in your inventory, look at the pot to get it"
-			$text0Final = @TAB & $text0 & @CRLF & "" & @CRLF & $text0L1 & @CRLF & $text0L2 & @CRLF & "" & @CRLF & $text0L3
+			$text0Final = @TAB & $text0 & @CRLF & @CRLF & $text0L1 & @CRLF & $text0L2 & @CRLF & @CRLF & $text0L3
 			GUICtrlSetData($edtDescription, $text0Final)
 
-		 ElseIf ($selectedItemText = "metal run") Then
-			$text1 = @TAB & "METAL RUN" & @CRLF & "" & @CRLF & "- Made by VietARK" & @CRLF & $selectedItemText
-			GUICtrlSetData($edtDescription, $text1)
+		 ElseIf ($selectedItemText = "gasoline separation") Then
+			$text1 = "GASOLINE SEPARATION"
+			$text1L1 = "- Required settings: 1920x1080-WindowsFullScreen"
+			$text1L2 = "- Disable Menu Transitions"
+			$text1L3 = "- This feature will split 10 slots 10 gas"
+			$text1L4 = "- Put gasoline in your inventory, keep inventory open"
+			$text1LFinal = @TAB & $text1 & @CRLF & @CRLF & $text1L1 & @CRLF & $text1L2 & @CRLF & $text1L3 & @CRLF & @CRLF & $text1L4
+			GUICtrlSetData($edtDescription, $text1LFinal)
 
 		 Else
 			GUICtrlSetData($edtDescription, 'Welcome to VietARK.')
@@ -143,16 +148,16 @@ WEnd
 Func _start()
    WinActivate("ARK: Survival Evolved")
    ;$ok = NOT $ok
-   $textInF2Key = "VietARK - Thanks for choosing us"
+   $textInF2Key = "VietARK - " & $selectedItemText
    $textHotKeyInF2Key = "F2: Start  -  F4: Stop"
-   $textCommonInF2Key = $textInF2Key & @CRLF & $selectedItemText & @CRLF & $textHotKeyInF2Key
+   $textCommonInF2Key = $textInF2Key & @CRLF & $textHotKeyInF2Key
 
    If ($selectedItemText = "take berries") Then
 	  ToolTip($textCommonInF2Key, 0, 0)
 	  start0()
 
-   ElseIf ($selectedItemText = "metal run") Then
-	  ToolTip($textInF2Key & @CRLF & "testing 2", 0, 0)
+   ElseIf ($selectedItemText = "gasoline separation") Then
+	  ToolTip($textCommonInF2Key, 0, 0)
 	  start1()
 
    Else
@@ -183,15 +188,22 @@ Func start0()
 EndFunc
 
 Func start1()
-   $fInterrupt = 0
-   While 1
-	  If $fInterrupt <> 0 Then
-		 Return
-	  EndIf
-
-	  MouseClick('left', 108, 584)
-	  Sleep(1000)
-	  MouseClick('left', 952, 980)
-	  Sleep(1000)
-   WEnd
+   For $i = 1 To 10
+	  Sleep(100)
+	  MouseClick("left", 267, 179, 2, 1)
+	  Sleep(100)
+	  Send("GASOLINE")
+	  Sleep(100)
+	  MouseClick("right", 163, 277, 1, 1)
+	  Sleep(100)
+	  MouseMove(157, 468, 0)
+	  Sleep(100)
+	  MouseMove(259, 545, 0)
+	  Sleep(100)
+	  MouseClick("left", 383, 547, 2, 1)
+	  Sleep(100)
+	  Send("10")
+	  Sleep(100)
+	  MouseClick("left", 365, 580, 1, 1)
+   Next
 EndFunc
