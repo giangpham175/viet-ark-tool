@@ -12,6 +12,7 @@ If you have an idea for a new feature, please suggest it to us. We really apprec
 ## Features
 - Take berries
 - Gasoline separation
+- Anti AFK
 
 ## Screenshots
 ![alt](https://cdn.discordapp.com/attachments/325451313867653130/853300486735265812/vietark.PNG)
