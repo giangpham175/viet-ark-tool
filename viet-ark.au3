@@ -46,7 +46,7 @@ GUICtrlSetCursor (-1, 0)
 $Label1 = GUICtrlCreateLabel("Viet ARK", 83, 128, 126, 36)
 GUICtrlSetFont(-1, 20, 800, 2, "Lucida Bright")
 $lstMode = GUICtrlCreateList("", 23, 192, 241, 294, BitOR($WS_BORDER, $WS_VSCROLL))
-GUICtrlSetData(-1, "take berries|gasoline separation|anti afk|hack feces|drop items|coming soon 3|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
+GUICtrlSetData(-1, "take berries|gasoline separation|anti afk|hack feces|drop items|drop items (advanced)|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
 GUICtrlSetFont(-1, 14, 800, 0, "MS Sans Serif")
 $Label2 = GUICtrlCreateLabel("Choose mode:", 25, 168, 84, 17)
 $Icon1 = GUICtrlCreateIcon(@ScriptDir&"\asset\vietark.ico", -1, 104, 40, 81, 81)
@@ -116,6 +116,8 @@ While 1
 			ToolTip($textCommonInBtnReady, 0, 0)
 		 ElseIf ($selectedItemText = "drop items") Then
 			ToolTip($textCommonInBtnReady, 0, 0)
+		 ElseIf ($selectedItemText = "drop items (advanced)") Then
+			ToolTip($textCommonInBtnReady, 0, 0)
 
 		 Else
 			ToolTip($textInBtnReady, 0, 0)
@@ -164,6 +166,16 @@ While 1
 			$text4LFinal = @TAB & $text4 & @CRLF & @CRLF & $text4L1 & @CRLF & $text4L2 & @CRLF & @CRLF & $text4L3
 			GUICtrlSetData($edtDescription, $text4LFinal)
 
+		 ElseIf ($selectedItemText = "drop items (advanced)") Then
+			$text5 = "DROP ITEMS (ADVANCED)"
+			$text5L1 = "** This feature only works when you open the vault in a sitting position"
+			$text5L2 = "- Required settings: 1920x1080-WindowsFullScreen"
+			$text5L3 = "- Disable Menu Transitions"
+			$text5L4 = "- Put 1 item that you are willing to give it up in your inventory (ex: 1 thatch, 1 wood, ....)"
+			$text5L5 = "- Sit (press C) and press F to any vault you need drop"
+			$text5LFinal = @TAB & $text5 & @CRLF & @CRLF & $text5L1 & @CRLF & @CRLF & $text5L2 & @CRLF & $text5L3 & @CRLF & @CRLF & $text5L4 & @CRLF & $text5L5
+			GUICtrlSetData($edtDescription, $text5LFinal)
+
 		 Else
 			GUICtrlSetData($edtDescription, 'Welcome to VietARK.')
 		 EndIf
@@ -203,6 +215,12 @@ Func _start()
    ElseIf ($selectedItemText = "drop items") Then
 	  ToolTip($textCommonInF2Key, 0, 0)
 	  start4()
+
+   ElseIf ($selectedItemText = "drop items (advanced)") Then
+	  ToolTip($textCommonInF2Key, 0, 0)
+	  MouseClick("left", 407, 185, 1, 1)
+	  Sleep(1000)
+	  start5()
 
    Else
 	  ToolTip($textInF2Key, 0, 0)
@@ -308,7 +326,7 @@ Func start3()
 
 	  Send('{NUMPADADD}')
 	  Sleep(1000)
-	  Send('{F}')
+	  Send('{f}')
 	  Sleep(3000)
 	  Local $TimFan = PixelSearch(1243, 233, 1337, 324, 0x8C8163, 10) ; Tìm ô đầu tiên trong toilet xem có phân không
 	  ; Mã màu SE : 0x97876A
@@ -333,18 +351,46 @@ Func start4()
 		 Return
 	  EndIf
 
+	  Sleep(100)
 	  MouseClick("left", 1424, 186, 1, 1)
 	  Sleep(100)
-	  MouseMove(252, 277, 0)
-	  Send("{O down}")
+	  MouseMove(250, 280, 1)
 	  Sleep(100)
-	  For $i = 1 To 10
-		 MouseMove(250, 280, 0)
-		 MouseMove(350, 280, 0)
-		 MouseMove(450, 280, 0)
-		 MouseMove(550, 280, 0)
-		 MouseMove(660, 280, 0)
+	  For $i = 1 To 5
+		 Send("{o down}")
+		 MouseMove(250, 280, 1)
+		 MouseMove(350, 280, 1)
+		 MouseMove(450, 280, 1)
+		 MouseMove(550, 280, 1)
+		 MouseMove(660, 280, 1)
+		 MouseMove(160, 370, 1)
+		 Send("{o up}")
 	  Next
-	  Send("{O up}")
+   WEnd
+EndFunc
+
+Func start5()
+   $fInterrupt = 0
+   While 1
+	  If $fInterrupt <> 0 Then
+		 Return
+	  EndIf
+
+	  Sleep(100)
+	  MouseClick("left", 1424, 186, 1, 1)
+	  Sleep(100)
+	  MouseMove(250, 280, 1)
+	  Sleep(100)
+	  For $i = 1 To 5
+		 Send("{o down}")
+		 MouseMove(250, 280, 1)
+		 MouseMove(350, 280, 1)
+		 MouseMove(450, 280, 1)
+		 MouseMove(550, 280, 1)
+		 MouseMove(660, 280, 1)
+		 MouseMove(160, 370, 1)
+		 Send("{o up}")
+	  Next
+
    WEnd
 EndFunc
