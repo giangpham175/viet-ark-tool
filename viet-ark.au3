@@ -37,7 +37,7 @@
 #include <Misc.au3>
 
 #Region ### START Koda GUI section ###
-$Form1 = GUICreate("VietARK", 856, 628, 700, 185)
+$Form1 = GUICreate("VietARK", 856, 628, 516, 181)
 $Group1 = GUICtrlCreateGroup("VietARK - Controller", 8, 8, 273, 585)
 GUICtrlSetFont(-1, 8, 800, 0, "MS Sans Serif")
 $btnFacebook = GUICtrlCreateButton("Facebook", 23, 512, 241, 33)
@@ -282,7 +282,10 @@ Func _start()
    $textHotKeyInF2Key = "F2: Start  -  F4: Stop"
    $textCommonInF2Key = $textInF2Key & @CRLF & $textHotKeyInF2Key
 
-   If ($selectedItemText = "take berries") Then
+   If ($selectedItemText = "") Then
+	  startNoChoosed()
+
+   ElseIf ($selectedItemText = "take berries") Then
 	  ToolTip($textCommonInF2Key, 0, 0)
 	  start0()
 
@@ -308,15 +311,16 @@ Func _start()
 	  Sleep(1000)
 	  start5()
 
-   ElseIf ($selectedItemText = "welcome")
-	  ToolTip($textInF2Key, 0, 0)
-	  MsgBox(0, "VietARK", "No mode choosed")
    Else
 	  ToolTip($textInF2Key, 0, 0)
 	  MsgBox(0, "VietARK", "No mode choosed")
    EndIf
 
 
+EndFunc
+
+Func startNoChoosed()
+   ToolTip("VietARK - No mode choosed", 0, 0)
 EndFunc
 
 Func start0()
