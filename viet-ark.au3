@@ -34,6 +34,7 @@
 #include <GUIListBox.au3>
 #include <StaticConstants.au3>
 #include <WindowsConstants.au3>
+#include <Misc.au3>
 
 #Region ### START Koda GUI section ###
 $Form1 = GUICreate("VietARK", 856, 628, 700, 185)
@@ -83,7 +84,7 @@ HotKeySet("{F4}", "_Interrupt")
 
 HotKeySet("{F5}", "_auto_Click")
 HotKeySet("{F6}", "_auto_Walk")
-HotKeySet("{F7}", "_auto_Run")
+;HotKeySet("{F7}", "_auto_Run")
 HotKeySet("{F8}", "_auto_Spam_E")
 HotKeySet("{F9}", "_auto_Spam_F")
 
@@ -91,11 +92,31 @@ $ark = WinWait("ARK: Survival Evolved")
 $fInterrupt = 0
 $timeToChat = 0
 $timeToEat = 0
-;$ok = False
+$ok = False
 
 While 1
    $nMsg = GUIGetMsg()
    $selectedItemText = _GUICtrlListBox_GetText($lstMode, _GUICtrlListBox_GetCurSel($lstMode))
+
+   ;; F7 KeyPress : Auto Run
+   If _IsPressed("76") Then
+	  $fInterrupt = 0
+
+	  $ok = NOT $ok
+	  If $ok Then
+		 If $fInterrupt <> 0 Then
+			Return
+		 EndIf
+		 ToolTip("VietARK - Auto Run" & @CRLF & "F7 again to Stop", 0, 0)
+		 Send("{SHIFTDOWN}{w down}")
+	  Else
+		 ToolTip("VietARK - Thanks for choosing us", 0, 0)
+		 Send("{SHIFTUP}{w up}")
+	  EndIf
+	  While _IsPressed("76")
+		 Sleep(250)
+	  WEnd
+   EndIf
 
    Switch $nMsg
 	  Case $GUI_EVENT_CLOSE
@@ -199,7 +220,7 @@ Func _Interrupt()
 EndFunc
 
 Func _auto_Click()
-   ToolTip("VietARK - Auto Click", 0, 0)
+   ToolTip("VietARK - Auto Click" & @CRLF & "F4 to Stop", 0, 0)
    $fInterrupt = 0
    While 1
 	  If $fInterrupt <> 0 Then
@@ -211,7 +232,7 @@ Func _auto_Click()
 EndFunc
 
 Func _auto_Walk()
-   ToolTip("VietARK - Auto Walk", 0, 0)
+   ToolTip("VietARK - Auto Walk" & @CRLF & "F4 to Stop", 0, 0)
    WinActivate("ARK: Survival Evolved")
    $fInterrupt = 0
    While 1
@@ -220,31 +241,16 @@ Func _auto_Walk()
 	  EndIf
 
 	  Send("{w down}")
-	  ;Sleep(2000)
-	  ;Send("{w up}")
+	  Sleep(2000)
+	  Send("{w up}")
    WEnd
 EndFunc
 
-Func _auto_Run()
-;   ToolTip("VietARK - Auto Run", 0, 0)
-;   WinActivate("ARK: Survival Evolved")
-;   $fInterrupt = 0
-;
-;   While 1
-;	  If $fInterrupt <> 0 Then
-;		 Return
-;	  EndIf
-;
-;	  ;Send("{w down}")
-;	  Send("{SHIFTDOWN w}")
-;	  Sleep(2000)
-;	  ;Send("{w up}")
-;	  Send("{w SHIFTUP}")
-;   WEnd
-EndFunc
+;Func _auto_Run()
+;EndFunc
 
 Func _auto_Spam_E()
-   ToolTip("VietARK - Auto Spam E", 0, 0)
+   ToolTip("VietARK - Auto Spam E" & @CRLF & "F4 to Stop", 0, 0)
    WinActivate("ARK: Survival Evolved")
    $fInterrupt = 0
    While 1
@@ -257,7 +263,7 @@ Func _auto_Spam_E()
 EndFunc
 
 Func _auto_Spam_F()
-   ToolTip("VietARK - Auto Spam F", 0, 0)
+   ToolTip("VietARK - Auto Spam F" & @CRLF & "F4 to Stop", 0, 0)
    WinActivate("ARK: Survival Evolved")
    $fInterrupt = 0
    While 1
@@ -302,6 +308,9 @@ Func _start()
 	  Sleep(1000)
 	  start5()
 
+   ElseIf ($selectedItemText = "welcome")
+	  ToolTip($textInF2Key, 0, 0)
+	  MsgBox(0, "VietARK", "No mode choosed")
    Else
 	  ToolTip($textInF2Key, 0, 0)
 	  MsgBox(0, "VietARK", "No mode choosed")
@@ -331,10 +340,6 @@ EndFunc
 
 Func start1()
    For $i = 1 To 10
-	  If $fInterrupt <> 0 Then
-		 Return
-	  EndIf
-
 	  Sleep(100)
 	  MouseClick("left", 267, 179, 2, 1)
 	  Sleep(100)
