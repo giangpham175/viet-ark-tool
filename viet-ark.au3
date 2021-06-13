@@ -78,8 +78,16 @@ GUICtrlSetColor(-1, 0xFF0000)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
 
-HotKeySet("{F4}", "_Interrupt")
 HotKeySet("{F2}", "_start")
+HotKeySet("{F4}", "_Interrupt")
+
+HotKeySet("{F5}", "_auto_Click")
+HotKeySet("{F6}", "_auto_Walk")
+HotKeySet("{F7}", "_auto_Run")
+HotKeySet("{F8}", "_auto_Spam_E")
+HotKeySet("{F9}", "_auto_Spam_F")
+
+$ark = WinWait("ARK: Survival Evolved")
 $fInterrupt = 0
 $timeToChat = 0
 $timeToEat = 0
@@ -101,6 +109,7 @@ While 1
 
 
 	  Case $btnReady
+		 $fInterrupt = 2
 		 WinActivate("ARK: Survival Evolved")
 		 $textInBtnReady = "VietARK - " & $selectedItemText
 		 $textHotKeyInBtnReady = "F2: Start  -  F4: Stop"
@@ -184,10 +193,81 @@ While 1
    EndSwitch
 WEnd
 
- Func _Interrupt()
-     ToolTip("VietARK - Thanks for choosing us", 0, 0)
-     $fInterrupt = 2
- EndFunc
+Func _Interrupt()
+   ToolTip("VietARK - Thanks for choosing us", 0, 0)
+   $fInterrupt = 2
+EndFunc
+
+Func _auto_Click()
+   ToolTip("VietARK - Auto Click", 0, 0)
+   $fInterrupt = 0
+   While 1
+	  If $fInterrupt <> 0 Then
+		 Return
+	  EndIf
+
+	  ControlClick($ark, "", "", "left")
+   WEnd
+EndFunc
+
+Func _auto_Walk()
+   ToolTip("VietARK - Auto Walk", 0, 0)
+   WinActivate("ARK: Survival Evolved")
+   $fInterrupt = 0
+   While 1
+	  If $fInterrupt <> 0 Then
+		 Return
+	  EndIf
+
+	  Send("{w down}")
+	  ;Sleep(2000)
+	  ;Send("{w up}")
+   WEnd
+EndFunc
+
+Func _auto_Run()
+;   ToolTip("VietARK - Auto Run", 0, 0)
+;   WinActivate("ARK: Survival Evolved")
+;   $fInterrupt = 0
+;
+;   While 1
+;	  If $fInterrupt <> 0 Then
+;		 Return
+;	  EndIf
+;
+;	  ;Send("{w down}")
+;	  Send("{SHIFTDOWN w}")
+;	  Sleep(2000)
+;	  ;Send("{w up}")
+;	  Send("{w SHIFTUP}")
+;   WEnd
+EndFunc
+
+Func _auto_Spam_E()
+   ToolTip("VietARK - Auto Spam E", 0, 0)
+   WinActivate("ARK: Survival Evolved")
+   $fInterrupt = 0
+   While 1
+	  If $fInterrupt <> 0 Then
+		 Return
+	  EndIf
+
+	  Send("{e}")
+   WEnd
+EndFunc
+
+Func _auto_Spam_F()
+   ToolTip("VietARK - Auto Spam F", 0, 0)
+   WinActivate("ARK: Survival Evolved")
+   $fInterrupt = 0
+   While 1
+	  If $fInterrupt <> 0 Then
+		 Return
+	  EndIf
+
+	  Send("{f}")
+   WEnd
+EndFunc
 
 Func _start()
    WinActivate("ARK: Survival Evolved")
