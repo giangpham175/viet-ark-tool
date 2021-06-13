@@ -144,7 +144,7 @@ While 1
 
 		 ElseIf ($selectedItemText = "anti afk") Then
 			$text2 = "ANTI AFK"
-			$text2L1 = "- Prepare a straight distance of about 7 to 10 units"
+			$text2L1 = "- Prepare a straight distance of about 7 to 10 units, and that place is safe"
 			$text2L2 = "- Put food & water into slot 1 & 2"
 			$text2L3 = "- This feature will do eat and drink every hour"
 			$text2LFinal = @TAB & $text2 & @CRLF & @CRLF & $text2L1 & @CRLF & $text2L2 & @CRLF & $text2L3
@@ -162,7 +162,7 @@ While 1
 			$text4 = "DROP ITEMS"
 			$text4L1 = "- Required settings: 1920x1080-WindowsFullScreen"
 			$text4L2 = "- Disable Menu Transitions"
-			$text4L3 = "- Press F to any vault you need drop"
+			$text4L3 = "- Press F to open vault you need drop"
 			$text4LFinal = @TAB & $text4 & @CRLF & @CRLF & $text4L1 & @CRLF & $text4L2 & @CRLF & @CRLF & $text4L3
 			GUICtrlSetData($edtDescription, $text4LFinal)
 
@@ -172,7 +172,7 @@ While 1
 			$text5L2 = "- Required settings: 1920x1080-WindowsFullScreen"
 			$text5L3 = "- Disable Menu Transitions"
 			$text5L4 = "- Put 1 item that you are willing to give it up in your inventory (ex: 1 thatch, 1 wood, ....)"
-			$text5L5 = "- Sit (press C) and press F to any vault you need drop"
+			$text5L5 = "- Sit (press C) and press F to open vault you need drop"
 			$text5LFinal = @TAB & $text5 & @CRLF & @CRLF & $text5L1 & @CRLF & @CRLF & $text5L2 & @CRLF & $text5L3 & @CRLF & @CRLF & $text5L4 & @CRLF & $text5L5
 			GUICtrlSetData($edtDescription, $text5LFinal)
 
