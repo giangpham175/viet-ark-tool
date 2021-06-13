@@ -21,7 +21,11 @@ Please let us know if you have problems with the features you use.
 
 ## Secret hotkey
 The following hotkeys are only for you, who have read our document:
-
+- F5 : Auto Click
+- F6 : Auto Walk
+- F7 : Auto Run ( not suppoerted yet )
+- F8 : Auto Spam E Keyboard
+- F9 : Auto Spam F Keyboard
 
 ## Screenshots
 ![alt](https://cdn.discordapp.com/attachments/325451313867653130/853455624398045184/vietark.PNG)
