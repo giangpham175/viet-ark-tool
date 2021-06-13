@@ -13,9 +13,12 @@ If you have an idea for a new feature, please suggest it to us. We really apprec
 - Take berries
 - Gasoline separation
 - Anti AFK
+- Hack feces
+- Drop items
+- Drop items ( Advanced )
 
 ## Screenshots
-![alt](https://cdn.discordapp.com/attachments/325451313867653130/853300486735265812/vietark.PNG)
+![alt](https://cdn.discordapp.com/attachments/325451313867653130/853455624398045184/vietark.PNG)
 
 ## Download
 Download the [latest release here](https://github.com/giangpham175/viet-ark-tool/tags).
