@@ -23,7 +23,7 @@ Please let us know if you have problems with the features you use.
 The following hotkeys are only for you, who have read our document:
 - F5 : Auto Click
 - F6 : Auto Walk
-- F7 : Auto Run ( not suppoerted yet )
+- F7 : Auto Run ( ***Attention: With this feature, Press F7 to Start, Press F7 again to Stop*** )
 - F8 : Auto Spam E Keyboard
 - F9 : Auto Spam F Keyboard
 
