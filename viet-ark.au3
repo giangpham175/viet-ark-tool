@@ -46,7 +46,7 @@ GUICtrlSetCursor (-1, 0)
 $Label1 = GUICtrlCreateLabel("Viet ARK", 83, 128, 126, 36)
 GUICtrlSetFont(-1, 20, 800, 2, "Lucida Bright")
 $lstMode = GUICtrlCreateList("", 23, 192, 241, 294, BitOR($WS_BORDER, $WS_VSCROLL))
-GUICtrlSetData(-1, "take berries|gasoline separation|anti afk|hack feces|coming soon 2|coming soon 3|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
+GUICtrlSetData(-1, "take berries|gasoline separation|anti afk|hack feces|drop items|coming soon 3|coming soon 4|coming soon 5|coming soon 6|coming soon 7|coming soon 8|coming soon 9|coming soon 10")
 GUICtrlSetFont(-1, 14, 800, 0, "MS Sans Serif")
 $Label2 = GUICtrlCreateLabel("Choose mode:", 25, 168, 84, 17)
 $Icon1 = GUICtrlCreateIcon(@ScriptDir&"\asset\vietark.ico", -1, 104, 40, 81, 81)
@@ -114,6 +114,8 @@ While 1
 			ToolTip($textCommonInBtnReady, 0, 0)
 		 ElseIf ($selectedItemText = "hack feces") Then
 			ToolTip($textCommonInBtnReady, 0, 0)
+		 ElseIf ($selectedItemText = "drop items") Then
+			ToolTip($textCommonInBtnReady, 0, 0)
 
 		 Else
 			ToolTip($textInBtnReady, 0, 0)
@@ -154,6 +156,14 @@ While 1
 			$text3LFinal = @TAB & $text3 & @CRLF & @CRLF & $text3L1 & @CRLF & $text3L2 & @CRLF & @CRLF & $text3L3
 			GUICtrlSetData($edtDescription, $text3LFinal)
 
+		 ElseIf ($selectedItemText = "drop items") Then
+			$text4 = "DROP ITEMS"
+			$text4L1 = "- Required settings: 1920x1080-WindowsFullScreen"
+			$text4L2 = "- Disable Menu Transitions"
+			$text4L3 = "- Press F to any vault you need drop"
+			$text4LFinal = @TAB & $text4 & @CRLF & @CRLF & $text4L1 & @CRLF & $text4L2 & @CRLF & @CRLF & $text4L3
+			GUICtrlSetData($edtDescription, $text4LFinal)
+
 		 Else
 			GUICtrlSetData($edtDescription, 'Welcome to VietARK.')
 		 EndIf
@@ -189,6 +199,10 @@ Func _start()
    ElseIf ($selectedItemText = "hack feces") Then
 	  ToolTip($textCommonInF2Key, 0, 0)
 	  start3()
+
+   ElseIf ($selectedItemText = "drop items") Then
+	  ToolTip($textCommonInF2Key, 0, 0)
+	  start4()
 
    Else
 	  ToolTip($textInF2Key, 0, 0)
@@ -309,5 +323,28 @@ Func start3()
 		 MsgBox(16, "Server Lag", 'Tạm ngưng do không tìm thấy phân' & @CRLF & "Bấm nút Flush xả cầu, tắt inventory trong game" & @CRLF & "rồi mới tắt bảng này")
 		 Sleep(100)
 	  EndIf
+   WEnd
+EndFunc
+
+Func start4()
+   $fInterrupt = 0
+   While 1
+	  If $fInterrupt <> 0 Then
+		 Return
+	  EndIf
+
+	  MouseClick("left", 1424, 186, 1, 1)
+	  Sleep(100)
+	  MouseMove(252, 277, 0)
+	  Send("{O down}")
+	  Sleep(100)
+	  For $i = 1 To 10
+		 MouseMove(250, 280, 0)
+		 MouseMove(350, 280, 0)
+		 MouseMove(450, 280, 0)
+		 MouseMove(550, 280, 0)
+		 MouseMove(660, 280, 0)
+	  Next
+	  Send("{O up}")
    WEnd
 EndFunc
